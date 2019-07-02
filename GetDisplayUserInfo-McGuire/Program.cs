@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GetDisplayUserInfo_McGuire
 {
@@ -8,19 +9,51 @@ namespace GetDisplayUserInfo_McGuire
         {
             Console.WriteLine("Hey there! I just need some basic info!");
 
-            Console.WriteLine("What is your first name?");
-            string firstName = Console.ReadLine();
-            Console.WriteLine("What is your last name?");
-            string lastName = Console.ReadLine();
+            string firstName = GetStringUserInfo("What is your first name?");
+            string lastName = GetStringUserInfo("What is your last name?");
+            int favoriteNumber = GetIntUserInfo("What is your favorite number?");
+            int numberOfPets = GetIntUserInfo("How many pets do you have?");
+            List<string> nameOfPets = PetNames("What are the names of your pets?", numberOfPets);
+            
 
-            Console.WriteLine("What is your favorite number?");
-            int favoriteNumber = int.Parse(Console.ReadLine());
+            Console.WriteLine("Your name is " + firstName + " " + lastName + ".");
+            Console.WriteLine("Your favorite number is " + favoriteNumber + ".");
+            Console.WriteLine("You have " + numberOfPets + " pets.");
+            Console.WriteLine("Your pet names are: ");
+            foreach (var name in nameOfPets)
+            {
+                Console.WriteLine(name);
+            }
 
-            Console.WriteLine("How many pets do you have?");
-            int numberOfPets = int.Parse(Console.ReadLine());
 
-           //Do a list or array of pet names
+        }
 
+        static string GetStringUserInfo(string question)
+        {
+            Console.WriteLine(question);
+            string answer = Console.ReadLine();
+            return answer;
+        }
+
+        static int GetIntUserInfo(string question)
+        {
+            Console.WriteLine(question);
+            int answer = Int32.Parse(Console.ReadLine());
+            return answer;
+        }
+
+        public static List<string> PetNames(string question, int range)
+        {
+            Console.WriteLine(question);
+            List<string> nameOfPets = new List<string>();
+            for (int i = 0; i < range; i++)
+            {
+                Console.WriteLine("Type a pet's name:");
+                string answer = Console.ReadLine();
+                nameOfPets.Add(answer);
+
+            }
+            return nameOfPets;
         }
     }
 }
